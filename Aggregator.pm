@@ -2,6 +2,8 @@
 
 package Aggregator;
 
+use strict;
+
 sub new {
   my ($class, %params) = @_;
   my $self = {};
@@ -79,7 +81,7 @@ sub writeResultFile {
   my ($self) = @_;
 
   open OUTFILE, ">$self->{_result_filename}" or die("Can't open file for writting: $!\n");
-  while (($partner, $amount) = each %{$self->{aggregate}}) {
+  while (my ($partner, $amount) = each %{$self->{aggregate}}) {
     print OUTFILE "$partner,$amount\n";
   }
   close OUTFILE;
